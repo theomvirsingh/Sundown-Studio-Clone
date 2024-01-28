@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .main-container {
+      display: flex;
+    }
+
+    .sub-main {
+      width: 100%;
+      display: flex;
+    }
+
+    .left {
+      width: 40%;
+      padding: 20px;
+      box-sizing: border-box;
+      border-right: 2px solid #ddd;
+      overflow: hidden;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .button {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #2980b9;
+    }
+
+    .button.active {
+      background-color: #e67e22;
+    }
+
+    .button-description {
+      margin-top: 10px;
+    }
+
+    .image-container {
+      text-align: center;
+    }
+
+    .image {
+      max-width: 100%;
+      height: auto;
+      display: none;
+    }
+
+    .image.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-container">
+  <div class="sub-main">
+    <div class="left">
+      <div class="button-container">
+        <button class="button active" onclick="showContent(0)">Button 1</button>
+        <button class="button" onclick="showContent(1)">Button 2</button>
+        <button class="button" onclick="showContent(2)">Button 3</button>
+      </div>
+      <div class="button-description">
+        <p id="description1">Button 1 Description...</p>
+        <p id="description2">Button 2 Description...</p>
+        <p id="description3">Button 3 Description...</p>
+      </div>
+    </div>
+    <div class="right">
+      <div class="image-container">
+        <img src="image1.jpg" alt="Image 1" class="image active">
+        <img src="image2.jpg" alt="Image 2" class="image">
+        <img src="image3.jpg" alt="Image 3" class="image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // JavaScript to handle button clicks and show corresponding content
+  function showContent(index) {
+    // Hide all images
+    var images = document.querySelectorAll('.image');
+    images.forEach(function(image) {
+      image.classList.remove('active');
+    });
+
+    // Show the selected image
+    images[index].classList.add('active');
+
+    // Hide all descriptions
+    var descriptions = document.querySelectorAll('.button-description p');
+    descriptions.forEach(function(description) {
+      description.style.display = 'none';
+    });
+
+    // Show the description for the selected button
+    document.getElementById('description' + (index + 1)).style.display = 'block';
+
+    // Update button styles
+    var buttons = document.querySelectorAll('.button');
+    buttons.forEach(function(button, i) {
+      if (i === index) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+
+  // By default, show content for the first button
+  showContent(0);
+</script>
+
+</body>
+</html>
